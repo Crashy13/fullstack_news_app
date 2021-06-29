@@ -17,14 +17,14 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/users/4/`)
+    fetch(`/api/v1/users/profiles/`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(data => this.setState({ data }));
+      .then(data => this.setState({data}));
   }
 
   handleInput(e) {
@@ -65,14 +65,13 @@ class Profile extends React.Component {
       body: formData,
     };
 
-    const response = await fetch('/api/v1/users/profiles/', options);
+    const response = await fetch('/api/v1/users/', options);
     this.setState({response});
   }
 
   render() {
     return(
       <>
-      <p>{}</p>
       <form onSubmit={this.handleSubmit}>
         <input type="text" name="display_name" value={this.state.display_name} onChange={this.handleInput}/>
         <input type="file" name="avatar" onChange={this.handleImage} />
@@ -86,6 +85,18 @@ class Profile extends React.Component {
         <button type='submit'>Save profile?</button>
 
       </form>
+
+      {
+        this.state.data
+        ? (
+          <div>
+             <p>{this.state.data.display_name}</p>
+             <img src={this.state.data.avatar} alt=""/>
+          </div>
+        )
+        : null
+      }
+
       </>
     )
   }
