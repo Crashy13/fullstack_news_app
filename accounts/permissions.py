@@ -10,9 +10,9 @@ class IsAuthOrReadOnly(permissions.BasePermission):
         # everyone can read
         if request.method == 'DELETE':
         # if method is 'DELETE'
-            return obj.username == request.user or request.user.is_staff
+            return obj.user == request.user or request.user.is_staff
         # if the user that requested the method equals the username of the object(message) or if the user is staff, they can delete
         if request.method == 'PUT':
         # if method is 'PUT'
-            return obj.username == request.user
+            return obj.user == request.user
         # if the user that requested the method equals the username of the object(message), they can edit

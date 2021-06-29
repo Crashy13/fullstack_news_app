@@ -16,6 +16,17 @@ class Profile extends React.Component {
 
   }
 
+  componentDidMount() {
+    fetch(`/api/v1/users/4/`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => this.setState({ data }));
+  }
+
   handleInput(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -40,25 +51,6 @@ class Profile extends React.Component {
     // reading the file and setting it to the preview property on state
   }
 
-  componentDidMount() {
-  this.retrieveMessages = setInterval(this.fetchData, 500)
-}
-
-componentWillUnmount() {
-  clearInterval(this.retrieveMessages)
-}
-
-fetchData() {
-  fetch('/api/v1/')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => this.setState({ messages: data }));
-}
-
   async handleSubmit(e) {
     e.preventDefault();
     let formData = new FormData();
@@ -79,6 +71,8 @@ fetchData() {
 
   render() {
     return(
+      <>
+      <p>{}</p>
       <form onSubmit={this.handleSubmit}>
         <input type="text" name="display_name" value={this.state.display_name} onChange={this.handleInput}/>
         <input type="file" name="avatar" onChange={this.handleImage} />
@@ -92,6 +86,7 @@ fetchData() {
         <button type='submit'>Save profile?</button>
 
       </form>
+      </>
     )
   }
 }
