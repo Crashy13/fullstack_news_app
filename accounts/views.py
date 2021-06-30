@@ -2,7 +2,6 @@ from rest_framework import generics
 
 from .models import Profile
 from .serializers import ProfileSerializer
-from .permissions import IsAuthOrReadOnly
 from django.shortcuts import render, get_object_or_404
 
 
@@ -16,7 +15,6 @@ class ProfileListAPIView(generics.ListCreateAPIView):
 
 class ProfileDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProfileSerializer
-    permission_classes = (IsAuthOrReadOnly,)
 
     def get_object(self):
         return get_object_or_404(Profile, user=self.request.user)

@@ -1,16 +1,17 @@
 import { Component } from 'react';
 import Cookies from 'js-cookie'
 import './App.css';
-import Profile from './Profile';
 import Login from './Login';
 import Registration from './Registration';
 import Navbar from './Navbar';
+import ArticleSubmit from './ArticleSubmit'
+import Articles from './Articles'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selection: !!Cookies.get('Authorization') ? 'profile' : 'login'
+      selection: !!Cookies.get('Authorization') ? 'articles' : 'login'
     }
 
     this.handleRegistration = this.handleRegistration.bind(this);
@@ -85,11 +86,11 @@ async handleLogout() {
   render() {
     return (
       <>
-        <Navbar handleNavigation={this.handleNavigation} isAuth={this.state.selection === 'profile'} handleLogout={this.handleLogout}/>
+        <Navbar handleNavigation={this.handleNavigation} isAuth={this.state.selection === 'articles'} handleLogout={this.handleLogout}/>
           <div>
             {this.state.selection === 'login' && <Login handleNavigation={this.handleNavigation} handleLogin={this.handleLogin}/>}
             {this.state.selection === 'registration' && <Registration handleNavigation={this.handleNavigation} handleRegistration={this.handleRegistration}/>}
-            {this.state.selection === 'profile' && <Profile />}
+            {this.state.selection === 'articles' && <Articles addArticle={this.addArticle} />}
           </div>
       </>
     );
