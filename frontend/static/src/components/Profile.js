@@ -20,7 +20,7 @@ class Profile extends React.Component {
     fetch(`/api/v1/users/profiles/user/`)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network response was not ok').catch();
         }
         return response.json();
       })
