@@ -1,17 +1,11 @@
 import React from 'react'
-import Cookies from 'js-cookie'
 import ArticleDetails from './ArticleDetails'
-import ArticleSubmit from './ArticleSubmit'
 
 class Articles extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       articles: [],
-      title: '',
-      body: '',
-      author: '',
-      category: '',
     }
 
 

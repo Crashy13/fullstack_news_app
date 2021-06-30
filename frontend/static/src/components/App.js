@@ -6,12 +6,13 @@ import Registration from './Registration';
 import Navbar from './Navbar';
 import ArticleSubmit from './ArticleSubmit'
 import Articles from './Articles'
+import Profile from './Profile'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selection: !!Cookies.get('Authorization') ? 'articles' : 'login'
+      selection: 'articles'
     }
 
     this.handleRegistration = this.handleRegistration.bind(this);
@@ -23,7 +24,6 @@ class App extends Component {
 handleNavigation(selection) {
   this.setState({selection});
 }
-
 
 async handleRegistration(user) {
   const options = {
@@ -41,7 +41,7 @@ async handleRegistration(user) {
   if(response.ok) {
   const data = await response.json().catch(handleError);
   Cookies.set('Authorization', `Token ${data.key}`)
-  this.setState({ selection: 'profile' })
+  this.setState({ selection: 'articles' })
   }
 }
 
@@ -61,7 +61,7 @@ async handleLogin(user) {
   if(response.ok) {
   const data = await response.json().catch(handleError);
   Cookies.set('Authorization', `Token ${data.key}`);
-  this.setState({ selection: 'profile' })
+  this.setState({ selection: 'articles' })
   }
 }
 
@@ -91,6 +91,8 @@ async handleLogout() {
             {this.state.selection === 'login' && <Login handleNavigation={this.handleNavigation} handleLogin={this.handleLogin}/>}
             {this.state.selection === 'registration' && <Registration handleNavigation={this.handleNavigation} handleRegistration={this.handleRegistration}/>}
             {this.state.selection === 'articles' && <Articles addArticle={this.addArticle} />}
+            {this.state.selection === 'profile' && <Profile />}
+            {this.state.selection === 'article submit' && <ArticleSubmit />}
           </div>
       </>
     );
