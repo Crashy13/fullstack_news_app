@@ -13,6 +13,7 @@ class Profile extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.editProfile = this.editProfile.bind(this);
 
   }
 
@@ -20,11 +21,13 @@ class Profile extends React.Component {
     fetch(`/api/v1/users/profiles/user/`)
       .then(response => {
         if (!response.ok) {
-          throw new Error('Network response was not ok').catch();
+          throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(data => this.setState({data}));
+      .then(data => this.setState({data})).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      })
   }
 
   handleInput(e) {
@@ -69,6 +72,41 @@ class Profile extends React.Component {
     this.setState({response});
   }
 
+  editProfile(profile) {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+      body: JSON.stringify(profile)
+    }
+    fetch(`/api/v1/users/profiles/user`, options)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+
+      })
+  }
+
+  deleteProfile(id) {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+    }
+    fetch(`/api/v1/users/profiles/user`, options)
+      .then(response => {
+
+      })
+  }
+
   render() {
     return(
       <>
@@ -80,6 +118,8 @@ class Profile extends React.Component {
           <div className='container'>
              <p>{this.state.data.display_name}</p>
              <img src={this.state.data.avatar} alt=""/>
+             <button type="button">Edit</button>
+             <button type="button">Delete</button>
           </div>
         )
         : <form onSubmit={this.handleSubmit}>
