@@ -17,7 +17,7 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/v1/users/profiles/`)
+    fetch(`/api/v1/users/profiles/user/`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -65,36 +65,36 @@ class Profile extends React.Component {
       body: formData,
     };
 
-    const response = await fetch('/api/v1/users/', options);
+    const response = await fetch('/api/v1/users/profiles/', options);
     this.setState({response});
   }
 
   render() {
     return(
       <>
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="display_name" value={this.state.display_name} onChange={this.handleInput}/>
-        <input type="file" name="avatar" onChange={this.handleImage} />
 
-        {
-          this.state.avatar
-          ? <img src={this.state.preview} alt=""/>
-          : null
-        }
-
-        <button type='submit'>Save profile?</button>
-
-      </form>
 
       {
         this.state.data
         ? (
-          <div>
+          <div className='container'>
              <p>{this.state.data.display_name}</p>
              <img src={this.state.data.avatar} alt=""/>
           </div>
         )
-        : null
+        : <form onSubmit={this.handleSubmit}>
+          <input type="text" name="display_name" value={this.state.display_name} onChange={this.handleInput}/>
+          <input type="file" name="avatar" onChange={this.handleImage} />
+
+          {
+            this.state.avatar
+            ? <img src={this.state.preview} alt=""/>
+            : null
+          }
+
+          <button type='submit'>Save profile?</button>
+
+        </form>
       }
 
       </>
