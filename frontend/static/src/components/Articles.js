@@ -1,5 +1,6 @@
 import React from 'react'
 import ArticleDetails from './ArticleDetails'
+import Cookies from 'js-cookie'
 
 class Articles extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class Articles extends React.Component {
       articles: [],
     }
 
+  this.deleteArticle = this.deleteArticle.bind(this);
 
   }
 
@@ -24,9 +26,27 @@ class Articles extends React.Component {
       });
   }
 
+  deleteArticle(id) {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+    }
+
+    fetch(`/api/v1/articles/${id}`, options)
+      .then(response => {
+        const articles = [...this.state.articles];
+        const index = articles.findIndex(article => article.id === id);
+        articles.splice(index, 1);
+        this.setState({articles})
+      })
+  }
+
   render() {
     const articles = this.state.articles.map(article => (
-    <ArticleDetails key={article.id} article={article}/>
+    <ArticleDetails key={article.id} article={article} deleteArticle={this.deleteArticle}/>
     ))
     return (
       <>

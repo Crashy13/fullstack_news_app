@@ -18,6 +18,7 @@ class ArticleDetail extends React.Component {
         <p>TITLE: {article.title}</p>
         <p>ARTICLE: {article.body}</p>
         <p>By: {article.author}</p>
+        <button type="button" onClick={() => this.props.deleteArticle(article.id)}>Delete</button>
       </li>
       </>
     )
