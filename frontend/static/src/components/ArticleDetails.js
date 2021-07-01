@@ -40,10 +40,10 @@ class ArticleDetail extends React.Component {
 
             {this.state.isEditing
               ? <button type='button' onClick={this.saveArticle}>Save</button>
-              : <button type='button' onClick={() => this.setState({isEditing: true})}>Edit</button>
+              : article.is_owner && <button type='button' onClick={() => this.setState({isEditing: true})}>Edit</button>
             }
 
-            <button type="button" onClick={() => this.props.deleteArticle(article.id)}>Delete</button>
+            {article.is_owner && <button type="button" onClick={() => this.props.deleteArticle(article.id)}>Delete</button>}
 
           </li>
         </div>

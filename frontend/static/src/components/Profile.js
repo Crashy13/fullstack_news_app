@@ -93,19 +93,6 @@ class Profile extends React.Component {
       })
   }
 
-  deleteProfile(id) {
-    const options = {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': Cookies.get('csrftoken'),
-      },
-    }
-    fetch(`/api/v1/users/profiles/user`, options)
-      .then(response => {
-
-      })
-  }
 
   render() {
     return(
@@ -135,7 +122,9 @@ class Profile extends React.Component {
             <button type='submit'>Save profile?</button>
 
           </form>
+
         }
+
 
 
       </div>

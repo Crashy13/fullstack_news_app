@@ -72,6 +72,12 @@ class Articles extends React.Component {
     return (
       <>
         <div className="article_container">
+          <nav>
+            <button className="category_button">Food</button>
+            <button className="category_button">Entertainment</button>
+            <button className="category_button">Fashion</button>
+            <button className="category_button">Tech</button>
+          </nav>
           <ul>{articles}</ul>
         </div>
       </>

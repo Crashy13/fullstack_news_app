@@ -56,6 +56,19 @@ body {
   padding: 5%;
 }
 
+.category_button {
+  color: #fff !important;
+	text-transform: uppercase;
+	text-decoration: none;
+	background: #9E2115;
+	padding: 20px;
+	border-radius: 5px;
+	display: inline-block;
+	border: none;
+	transition: all 0.4s ease 0s;
+  margin: 5px 80px;
+}
+
 .profile_container {
   width: 75%;
   height: 100%;

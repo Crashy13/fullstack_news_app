@@ -20,7 +20,8 @@ class ArticleSubmit extends React.Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  addArticle(article) {
+  addArticle(e) {
+    e.preventDefault()
     const options = {
       method: 'POST',
       headers: {

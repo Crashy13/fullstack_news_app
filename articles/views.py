@@ -15,4 +15,11 @@ class ArticleListAPIView(generics.ListCreateAPIView):
 class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    # permission_classes = (IsAuthOrReadOnly,)
+    permission_classes = (IsAuthOrReadOnly,)
+
+class CategoryListAPIView(generics.ListCreateAPIView):
+    serializer_class = ArticleSerializer
+
+    def get_queryset(self):
+        selection = self.request.query_params['category']
+        return Article.objects.filter(category=selection)

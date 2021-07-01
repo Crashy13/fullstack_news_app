@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Article
 
 class ArticleSerializer(serializers.ModelSerializer):
+    author = serializers.ReadOnlyField(source='author.username')
     is_owner = serializers.SerializerMethodField('get_owner_status')
     is_published = serializers.SerializerMethodField('get_published_status')
 
