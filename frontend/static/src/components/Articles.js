@@ -59,9 +59,9 @@ class Articles extends React.Component {
       .then(response => response.json())
       .then(data => {
         const articles = [...this.state.articles];
-        const index = articles.findIndex(article => article.id);
+        const index = articles.findIndex(body => body.id === article.id);
         articles[index] = data;
-        console.log({articles});
+        this.setState({articles});
       });
   }
 
@@ -71,7 +71,9 @@ class Articles extends React.Component {
     ))
     return (
       <>
-        <ul>{articles}</ul>
+        <div className="article_container">
+          <ul>{articles}</ul>
+        </div>
       </>
     )
   }

@@ -21,6 +21,7 @@ class App extends Component {
     this.handleNavigation = this.handleNavigation.bind(this);
   }
 
+
 handleNavigation(selection) {
   this.setState({selection});
 }
@@ -85,16 +86,18 @@ async handleLogout() {
 
   render() {
     return (
-      <>
-        <Navbar handleNavigation={this.handleNavigation} isAuth={this.state.selection === 'articles'} handleLogout={this.handleLogout}/>
-          <div>
-            {this.state.selection === 'login' && <Login handleNavigation={this.handleNavigation} handleLogin={this.handleLogin}/>}
-            {this.state.selection === 'registration' && <Registration handleNavigation={this.handleNavigation} handleRegistration={this.handleRegistration}/>}
-            {this.state.selection === 'articles' && <Articles addArticle={this.addArticle} />}
-            {this.state.selection === 'profile' && <Profile />}
-            {this.state.selection === 'article submit' && <ArticleSubmit />}
-          </div>
-      </>
+      <div className="main_container">
+        <>
+          <Navbar handleNavigation={this.handleNavigation} isAuth={this.state.selection === 'articles'} handleLogout={this.handleLogout}/>
+            <div>
+              {this.state.selection === 'login' && <Login handleNavigation={this.handleNavigation} handleLogin={this.handleLogin}/>}
+              {this.state.selection === 'registration' && <Registration handleNavigation={this.handleNavigation} handleRegistration={this.handleRegistration}/>}
+              {this.state.selection === 'articles' && <Articles addArticle={this.addArticle} />}
+              {this.state.selection === 'profile' && <Profile />}
+              {this.state.selection === 'article submit' && <ArticleSubmit />}
+            </div>
+        </>
+      </div>
     );
   }
 }

@@ -25,27 +25,29 @@ class ArticleDetail extends React.Component {
   render() {
     const article = this.props.article;
     return(
-      <>
-      <li>
+        <>
+        <div className="article_single">
+          <li>
 
-        <p>TITLE: {article.title}</p>
+            <h3 className="article_title">{article.title}</h3>
 
-        {this.state.isEditing
-          ? <textarea cols="30" row="10" name="body" value={this.state.body} onChange={this.handleInput}/>
-          : <p>ARTICLE: {article.body}</p>
-        }
+            {this.state.isEditing
+              ? <textarea cols="30" row="10" name="body" value={this.state.body} onChange={this.handleInput}/>
+            : <p className="article_body">{article.body}</p>
+            }
 
-        <p>By: {article.author}</p>
+            <p>By: {article.author}</p>
 
-        {this.state.isEditing
-          ? <button type='button' onClick={this.saveArticle}>Save</button>
-          : <button type='button' onClick={() => this.setState({isEditing: true})}>Edit</button>
-        }
+            {this.state.isEditing
+              ? <button type='button' onClick={this.saveArticle}>Save</button>
+              : <button type='button' onClick={() => this.setState({isEditing: true})}>Edit</button>
+            }
 
-        {article.is_owner && <button type="button" onClick={() => this.props.deleteArticle(article.id)}>Delete</button>}
+            <button type="button" onClick={() => this.props.deleteArticle(article.id)}>Delete</button>
 
-      </li>
-      </>
+          </li>
+        </div>
+        </>
     )
   }
 }

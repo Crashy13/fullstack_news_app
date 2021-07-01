@@ -44,13 +44,14 @@ class ArticleSubmit extends React.Component {
   render() {
     return(
       <>
-        <form onSubmit={this.addArticle}>
-          <input type="text" name="title" value={this.state.title} onChange={this.handleInput} placeholder="Title of Article"/>
-          <textarea name="body" value={this.state.body} onChange={this.handleInput} id="" cols="30" rows="10" placeholder="Body of Article"></textarea>
-          <input type="text" name="author" value={this.state.author} onChange={this.handleInput} placeholder="Author of Article"/>
-          <input type="text" name="category" value={this.state.category} onChange={this.handleInput} placeholder="Category of Article"/>
-          <button type="submit">Submit</button>
-        </form>
+        <div className="create_container">
+          <form onSubmit={this.addArticle} className="create_form">
+            <input type="text" name="title" value={this.state.title} onChange={this.handleInput} placeholder="Title of Article" className="create_title"/>
+            <textarea name="body" value={this.state.body} onChange={this.handleInput} id="" cols="90" rows="30" placeholder="Body of Article" className="create_body"></textarea>
+            <input type="text" name="category" value={this.state.category} onChange={this.handleInput} placeholder="Category of Article" className="create_category"/>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </>
     )
   }
