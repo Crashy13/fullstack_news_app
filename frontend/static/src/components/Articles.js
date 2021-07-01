@@ -10,6 +10,7 @@ class Articles extends React.Component {
     }
 
   this.deleteArticle = this.deleteArticle.bind(this);
+  this.editArticle = this.editArticle.bind(this);
 
   }
 
@@ -44,9 +45,29 @@ class Articles extends React.Component {
       })
   }
 
+  editArticle(article) {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
+      body: JSON.stringify(article),
+    }
+
+    fetch(`/api/v1/articles/${article.id}`, options)
+      .then(response => response.json())
+      .then(data => {
+        const articles = [...this.state.articles];
+        const index = articles.findIndex(article => article.id);
+        articles[index] = data;
+        console.log({articles});
+      });
+  }
+
   render() {
     const articles = this.state.articles.map(article => (
-    <ArticleDetails key={article.id} article={article} deleteArticle={this.deleteArticle}/>
+    <ArticleDetails key={article.id} article={article} deleteArticle={this.deleteArticle} editArticle={this.editArticle} />
     ))
     return (
       <>
