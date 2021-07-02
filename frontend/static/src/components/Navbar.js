@@ -9,6 +9,7 @@ function Navbar(props) {
         {!!Cookies.get('Authorization') && <button className="profile" onClick={() => props.handleNavigation('profile')}>Profile</button>}
         {!!Cookies.get('Authorization') && <button className="newPost" onClick={() => props.handleNavigation('article submit')}>Create New Post</button>}
         {!!Cookies.get('Authorization') && <button className="logout" onClick={() => props.handleLogout('articles')}>Logout</button>}
+        {!!Cookies.get('Authorization') && <button className="adminView" onClick={() => props.handleNavigation('admin view')}>Admin View</button>}
     </nav>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookies from 'js-cookie';
+import ProfileDetails from './ProfileDetails'
 
 class Profile extends React.Component {
   constructor(props) {
@@ -8,12 +9,12 @@ class Profile extends React.Component {
       display_name: '',
       avatar: null,
       preview: '',
+      isEditing: false,
     }
 
     this.handleInput = this.handleInput.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.editProfile = this.editProfile.bind(this);
 
   }
 
@@ -72,27 +73,6 @@ class Profile extends React.Component {
     this.setState({response});
   }
 
-  editProfile(profile) {
-    const options = {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': Cookies.get('csrftoken'),
-      },
-      body: JSON.stringify(profile)
-    }
-    fetch(`/api/v1/users/profiles/user`, options)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-
-      })
-  }
-
 
   render() {
     return(
@@ -103,11 +83,7 @@ class Profile extends React.Component {
         {
           this.state.data
           ? (
-            <div className='container'>
-               <p>Profile Name: {this.state.data.display_name}</p>
-               <p>Profile Picture:</p><img src={this.state.data.avatar} alt=""/>
-               <button type="button">Edit</button>
-            </div>
+            <ProfileDetails />
           )
           : <form onSubmit={this.handleSubmit}>
             <input type="text" name="display_name" value={this.state.display_name} onChange={this.handleInput}/>
@@ -123,10 +99,7 @@ class Profile extends React.Component {
 
           </form>
 
-        }
-
-
-
+      }
       </div>
       </>
     )

@@ -24,7 +24,8 @@ class Article(models.Model):
     body = models.TextField()
     # https://docs.djangoproject.com/en/3.2/ref/models/fields/#module-django.db.models.fields.related
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    category = models.CharField(max_length=255, choices=CATEGORY_CHOICES, null=True)
+    category = models.CharField(max_length=255, null=True)
+    is_published = models.BooleanField(default=False)
 
 
     def __str__(self):

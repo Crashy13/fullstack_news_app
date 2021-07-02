@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import ArticleSubmit from './ArticleSubmit'
 import Articles from './Articles'
 import Profile from './Profile'
+import AdminView from './AdminView'
 
 class App extends Component {
   constructor(props) {
@@ -95,6 +96,7 @@ async handleLogout() {
               {this.state.selection === 'articles' && <Articles addArticle={this.addArticle} />}
               {this.state.selection === 'profile' && <Profile />}
               {this.state.selection === 'article submit' && <ArticleSubmit />}
+              {this.state.selection === 'admin view' && <AdminView />}
             </div>
         </>
       </div>

@@ -11,6 +11,10 @@ class Articles extends React.Component {
 
   this.deleteArticle = this.deleteArticle.bind(this);
   this.editArticle = this.editArticle.bind(this);
+  this.filterFood = this.filterFood.bind(this);
+  this.filterEntertainment = this.filterEntertainment.bind(this);
+  this.filterFashion = this.filterFashion.bind(this);
+  this.filterTech = this.filterTech.bind(this);
 
   }
 
@@ -65,6 +69,60 @@ class Articles extends React.Component {
       });
   }
 
+  filterFood() {
+    fetch(`/api/v1/articles/category/?category=Food`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => this.setState({ articles: data })).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }
+
+  filterEntertainment() {
+    fetch(`/api/v1/articles/category/?category=Entertainment`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => this.setState({ articles: data })).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }
+
+  filterFashion() {
+    fetch(`/api/v1/articles/category/?category=Fashion`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => this.setState({ articles: data })).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }
+
+  filterTech() {
+    fetch(`/api/v1/articles/category/?category=Tech`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => this.setState({ articles: data })).catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  }
+
+
+
   render() {
     const articles = this.state.articles.map(article => (
     <ArticleDetails key={article.id} article={article} deleteArticle={this.deleteArticle} editArticle={this.editArticle} />
@@ -73,10 +131,11 @@ class Articles extends React.Component {
       <>
         <div className="article_container">
           <nav>
-            <button className="category_button">Food</button>
-            <button className="category_button">Entertainment</button>
-            <button className="category_button">Fashion</button>
-            <button className="category_button">Tech</button>
+            <button className="category_button" onClick={() => this.componentDidMount()}>All</button>
+            <button className="category_button" onClick={() => this.filterFood()}>Food</button>
+            <button className="category_button" onClick={() => this.filterEntertainment()}>Entertainment</button>
+            <button className="category_button" onClick={() => this.filterFashion()}>Fashion</button>
+            <button className="category_button" onClick={() => this.filterTech()}>Tech</button>
           </nav>
           <ul>{articles}</ul>
         </div>
