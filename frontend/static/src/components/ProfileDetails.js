@@ -80,14 +80,14 @@ class ProfileDetails extends React.Component {
     this.state.display_name && formData.append('display_name', this.state.display_name);
 
     const options = {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'X-CSRFToken': Cookies.get('csrftoken'),
       },
       body: formData,
     };
 
-    const response = await fetch('/api/v1/users/profiles/', options);
+    const response = await fetch(`/api/v1/users/profiles/`, options);
     this.setState({response})
   }
 
